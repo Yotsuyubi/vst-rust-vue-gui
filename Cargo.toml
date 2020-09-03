@@ -1,0 +1,15 @@
+[package]
+name = "vue-vst-rs"
+version = "0.1.0"
+authors = ["wehiroi"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+vst = "^0.2"
+vst-gui = { git = "https://github.com/mikesoylu/rust-vst-gui.git" }
+
+[lib]
+name = "basicvst"
+crate-type = ["cdylib"]
