@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas id="canvas" width="480" height="320"></canvas>
+    <canvas id="canvas" :width="width" :height="height"></canvas>
   </div>
 </template>
 
@@ -8,11 +8,10 @@
 export default {
   data() {
     return {
-      count: 0,
       spec: null,
       canvasCtx: null,
-      width: 480,
-      height: 320
+      width: 460,
+      height: 300
     }
   },
 
@@ -36,16 +35,16 @@ export default {
         this.canvasCtx.lineWidth = 2
         this.canvasCtx.strokeStyle = 'rgb(0, 0, 0)'
         this.canvasCtx.beginPath()
-        const sliceWidth = this.width * 1.0 / this.specArray.length
+        const initWidth = this.width / Math.log(this.specArray.length / 2)
         let x = 0
-        for(let i = 0; i < this.specArray.length; i++) {
+        for(let i = 0; i < this.specArray.length / 2; i++) {
           const y = this.height - this.specArray[i] * this.height
           if(i === 0) {
             this.canvasCtx.moveTo(x, y)
           } else {
             this.canvasCtx.lineTo(x, y)
           }
-          x += sliceWidth
+          x += initWidth / (i+1)
         }
         this.canvasCtx.lineTo(this.width, this.height)
         this.canvasCtx.stroke()
@@ -54,13 +53,12 @@ export default {
 
     getter: function() {
       const spec = external.invoke("getSpectrum")
-      console.log(spec)
       this.spec = spec
     },
 
     update: function() {
       const self = this
-      this.intervalid1 = setInterval(function(){
+      this.intervalid1 = setInterval(function() {
         self.getter()
         self.draw()
       }, 1000/30)
@@ -74,7 +72,8 @@ export default {
         const specArray = array.map((x) => Number(x))
         const min = specArray.reduce((a, b) => Math.min(a, b))
         const max = specArray.reduce((a, b) => Math.max(a, b))
-        return specArray.map((x) => (x - min) / (max - min)) // min-max normalization
+        // return specArray.map((x) => (x - min) / (max - min)) // min-max normalization
+        return specArray.map((x) => x/(specArray.length/2))
       }
       return null
     }

@@ -39,6 +39,11 @@ fn inline_script(s: &str) -> String {
 	format!(r#"<script type="text/javascript">{}</script>"#, s)
 }
 
+fn inline_style(s: &str) -> String {
+	format!(r#"<style type="text/css">{}</style>"#, s)
+}
+
+
 fn get_html() -> String {
     format!(r#"
         <!doctype html>
@@ -46,6 +51,7 @@ fn get_html() -> String {
             <head>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+				{style}
             </head>
             <body>
                 <div id="app"></div>
@@ -61,6 +67,7 @@ fn get_html() -> String {
             </body>
         </html>
         "#,
+		style = inline_style(include_str!("style.css")),
         scripts = inline_script(include_str!("bundle.js"))
     )
 }
@@ -146,7 +153,7 @@ impl Plugin for ExampleSpectrum {
 		// TODO: FFT
 		let mut locked_spectrum = self.spectrum.lock().unwrap();
 		// dummy
-		locked_spectrum.spectrum = complex_vec_to_float_vec(input);
+		locked_spectrum.spectrum = complex_vec_to_float_vec(output);
     }
 
     fn get_editor(&mut self) -> Option<Box<dyn Editor>> {
