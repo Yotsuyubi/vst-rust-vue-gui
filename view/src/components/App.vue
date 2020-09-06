@@ -21,6 +21,11 @@ export default {
     this.update()
   },
 
+  beforeDestroy() {
+    console.log('beforeDestroy');
+    clearInterval(this.intervalid1)
+  },
+
   methods: {
     initCanvas: function() {
       const canvas = document.getElementById("canvas")
@@ -52,8 +57,13 @@ export default {
     },
 
     getter: function() {
-      const spec = external.invoke("getSpectrum")
-      this.spec = spec
+      // do not edit.
+      if (!document.hidden) {
+
+        const spec = external.invoke("getSpectrum")
+        this.spec = spec
+
+      }
     },
 
     update: function() {
