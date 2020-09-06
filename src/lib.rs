@@ -138,7 +138,6 @@ impl Plugin for ExampleSpectrum {
     }
 
     fn process(&mut self, buffer: &mut AudioBuffer<f32>) {
-
 		let (input_buffer, output_buffer) = buffer.split();
 		let channel_l_buffer = input_buffer.get(0);
 		let len = channel_l_buffer.to_vec().len();
@@ -150,9 +149,7 @@ impl Plugin for ExampleSpectrum {
 		let fft = planner.plan_fft(len);
 		fft.process(&mut input[..], &mut output[..]);
 
-		// TODO: FFT
 		let mut locked_spectrum = self.spectrum.lock().unwrap();
-		// dummy
 		locked_spectrum.spectrum = complex_vec_to_float_vec(output);
     }
 
