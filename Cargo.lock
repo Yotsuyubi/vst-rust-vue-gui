@@ -213,7 +213,7 @@ dependencies = [
 [[package]]
 name = "vst-gui"
 version = "0.2.0"
-source = "git+https://github.com/mikesoylu/rust-vst-gui.git#d17c09c9e65a6f6689f11fa1f8c7d82312c94028"
+source = "git+https://github.com/Yotsuyubi/rust-vst-gui.git#ea86bc30835590be0cb2d7fcc079779cfbb5c626"
 dependencies = [
  "cocoa",
  "memoffset",
@@ -234,7 +234,7 @@ dependencies = [
 [[package]]
 name = "webview-sys"
 version = "0.0.1"
-source = "git+https://github.com/mikesoylu/rust-vst-gui.git#d17c09c9e65a6f6689f11fa1f8c7d82312c94028"
+source = "git+https://github.com/Yotsuyubi/rust-vst-gui.git#ea86bc30835590be0cb2d7fcc079779cfbb5c626"
 dependencies = [
  "cc",
  "cocoa",

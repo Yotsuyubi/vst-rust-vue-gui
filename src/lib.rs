@@ -6,7 +6,6 @@ use rustfft::FFTplanner;
 use rustfft::num_complex::Complex;
 use rustfft::num_traits::Zero;
 
-use std::f32::consts::PI;
 use std::sync::{Arc, Mutex};
 
 use vst::buffer::AudioBuffer;
@@ -83,9 +82,9 @@ fn create_javascript_callback(
         let mut tokens = message.split_whitespace();
 
         let command = tokens.next().unwrap_or("");
-        let argument = tokens.next().unwrap_or("").parse::<f32>();
+        let _argument = tokens.next().unwrap_or("").parse::<f32>();
 
-		let mut locked_spectrum = spectrum.lock().unwrap();
+		let locked_spectrum = spectrum.lock().unwrap();
 
 		match command {
 			"getSpectrum" => {
@@ -138,7 +137,7 @@ impl Plugin for ExampleSpectrum {
     }
 
     fn process(&mut self, buffer: &mut AudioBuffer<f32>) {
-		let (input_buffer, output_buffer) = buffer.split();
+		let (input_buffer, _output_buffer) = buffer.split();
 		let channel_l_buffer = input_buffer.get(0);
 		let len = channel_l_buffer.to_vec().len();
 

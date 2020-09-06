@@ -8,7 +8,7 @@ edition = "2018"
 
 [dependencies]
 vst = "^0.2"
-vst-gui = { git = "https://github.com/mikesoylu/rust-vst-gui.git" }
+vst-gui = { git = "https://github.com/Yotsuyubi/rust-vst-gui.git" }
 rustfft = "*"
 
 [lib]

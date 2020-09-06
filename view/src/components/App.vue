@@ -57,13 +57,8 @@ export default {
     },
 
     getter: function() {
-      // do not edit.
-      if (!document.hidden) {
-
-        const spec = external.invoke("getSpectrum")
-        this.spec = spec
-
-      }
+      const spec = external.invoke("getSpectrum")
+      this.spec = spec
     },
 
     update: function() {
